@@ -1,0 +1,13 @@
+---
+- name: Instalamos los paquetes de NFS y arrancamos el servicio
+  dnf:
+    name: 
+      - nfs-utils
+      - net-tools
+    state: present
+
+- name: Iniciamos el servicio nfs y lo habilitamos.
+  systemd:
+    name: nfs-server
+    state: restarted
+    enabled: yes

@@ -1,0 +1,38 @@
+---
+
+- name: Copiamos el fichero /etc/exports
+  template:
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+
+- name: forzamos el reload del fichero exports
+  command: /usr/sbin/exportfs -r
+  
+- name: forzamos el reload del fichero exports  
+  command: /usr/sbin/exportfs -s
+
+################## FIREWALLD##################
+
+- firewalld:
+    service: nfs
+    permanent: true
+    state: enabled
+
+- firewalld:
+    service: rpc-bind
+    permanent: true
+    state: enabled
+
+- firewalld:
+    service: mountd
+    permanent: true
+    state: enabled
+
+- name: Reiniciamos firewalld
+  systemd:
+    name: firewalld
+    state: restarted
+

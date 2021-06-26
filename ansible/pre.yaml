@@ -1,0 +1,6 @@
+- name: Tareas previas de configuración
+  hosts: all
+  become: yes
+  
+  roles:
+    - config
