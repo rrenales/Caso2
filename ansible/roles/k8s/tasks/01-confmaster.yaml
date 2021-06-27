@@ -74,12 +74,29 @@
     name: firewalld
     state: restarted
 
-- name: Instalamos el plugin CNI (Container Network Interface) de kubernetes y definimos la red de los PODs.
-  command: kubeadm init --pod-network-cidr 192.169.0.0/16
-  register: kubeadm
+#- name: Instalamos el plugin CNI (Container Network Interface) de kubernetes y definimos la red de los PODs.
+#  command: kubeadm init --pod-network-cidr 192.169.0.0/16
+#  register: kubeadm
+  
 # Pintamos por pantalla la salida, de esta manera podemos copiar el token.
-- name: debug
-  debug: msg="{{ kubeadm.stdout }}"
+#- name: debug
+#  debug: msg="{{ kubeadm.stdout }}"
 
+- name: Exportamos config de kubectl para el user root.
+  shell: export KUBECONFIG
+  delegate_to: 127.0.0.1
 
+- name: Creamos el directorio para guardar la config que exportamos.
+  file:
+    path: /root/.kube
+    state: directory
 
+- copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /root/.kube/config
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Instalando el SDN de Azure.
+  command: kubectl apply -f https://docs.projectcalico.org/manifests/canal.yaml

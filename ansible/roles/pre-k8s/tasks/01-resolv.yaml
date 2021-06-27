@@ -22,6 +22,19 @@
 - name: Permitimos masquerade en el FW.
   command: firewall-cmd --add-masquerade --permanent
 
+#Aunque el siguiente comando es para la sdn de azure, lo ponemos aqui porque se tiene que ejecutar en todos los hosts.
+
+- firewalld:
+    port: 8285/tcp
+    permanent: true
+    state: enabled
+
+- firewalld:
+    port: 8472/tcp
+    permanent: true
+    state: enabled
+
+
 - name: Reiniciamos firewalld
   systemd:
     name: firewalld

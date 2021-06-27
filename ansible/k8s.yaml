@@ -3,4 +3,4 @@
   become: yes
   
   roles:
-    - pre-k8s
+    - k8s

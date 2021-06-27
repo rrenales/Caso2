@@ -1,0 +1,6 @@
+- name: Configuración para los workers.
+  hosts: all
+  become: yes
+  
+  roles:
+    - workers
