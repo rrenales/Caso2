@@ -15,4 +15,7 @@ ansible-playbook -i hosts -l workers,master pre-k8s.yaml
 ansible-playbook -i hosts -l master k8s.yaml 
 
 # Lanzamos el playbook de configuración  de kubernetes para los workers.
-ansible-playbook -i hosts -l master workers.yaml 
+ansible-playbook -i hosts -l workers workers.yaml
+
+# Lanzamos el playbook de configuración  de ingress i creacion usuario kubeadmin en el master
+ansible-playbook -i hosts -l master k8s-master.yaml

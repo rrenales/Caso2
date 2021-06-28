@@ -1,11 +1,6 @@
 ---
 #Comenzamos el script pidiendo el token que emos mostrado por pantalla anteriormente, sino no podemos unir los workers al nodo.
 
-vars_prompt:
-- name: "token"
-  prompt: "Introduce el token que se ha mostrado por pantalla en la tarea anterior con nombre: Instalamos el plugin CNI (Container Network Interface) de kubernetes"
-  private: yes
-
 - firewalld:
     port: 10250/tcp
     permanent: true
@@ -26,5 +21,5 @@ vars_prompt:
 
 #damos tiempo a los workers a ponerse como ready.
 
-#- pause:
-#    minutes: 2
+- pause:
+    minutes: 2
