@@ -1,4 +1,0 @@
-
-- include_tasks: 01-resolv.yaml
-- include_tasks: 02-swap.yaml
-- include_tasks: 03-install.yaml

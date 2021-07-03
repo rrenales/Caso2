@@ -1,4 +1,0 @@
-
-- include_tasks: 01-timezone.yaml
-- include_tasks: 02-chrony.yaml
-- include_tasks: 03-install.yaml

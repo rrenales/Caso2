@@ -1,6 +1,0 @@
-- name: Instalación y configuracion servidor NFS
-  hosts: all
-  become: yes
-  
-  roles:
-    - nfs
