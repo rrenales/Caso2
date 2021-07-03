@@ -1,0 +1,9 @@
+---
+- name: Actualizamos dnf
+  dnf:
+    name: "*"
+    state: latest
+
+- name: Asignamos el TimeZone para Europe/Madrid
+  command: /usr/bin/timedatectl set-timezone Europe/Zurich
+  

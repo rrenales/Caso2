@@ -1,0 +1,6 @@
+- name: Instalación y configuracion pre kubernetes a todos los nodos
+  hosts: all
+  become: yes
+  
+  roles:
+    - k8s

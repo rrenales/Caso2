@@ -1,0 +1,9 @@
+---
+
+- name: Instalando paquetes..
+  dnf:
+    name: 
+      - nfs-utils
+      - nfs4-acl-tools
+      - wget 
+    state: present

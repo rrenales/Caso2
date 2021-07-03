@@ -1,0 +1,12 @@
+---
+
+- name: Desactivamos la swap si esta activada.
+  command: swapoff  -a
+
+#Eliminamos la linea del swap en el fiche fstab.
+
+- lineinfile:
+    path: /etc/fstab 
+    regexp: '\ swap'
+    state: absent
+    backup: yes

@@ -1,0 +1,39 @@
+---
+- name: Desplegando un ingress controller
+  command:  kubectl apply -f https://raw.githubusercontent.com/haproxytech/kubernetes-ingress/v1.5/deploy/haproxy-ingress.yaml
+
+- name: Añadimos el usuario kubeadmin.
+  user:
+    name: kubeadmin
+    shell: /bin/bash
+    append: yes
+    skeleton: "/home/kubeadmin"
+    create_home: yes
+    password: "kubeadmin"
+
+
+- name: Creamos el directorio para el user kubeadmin
+  file:
+    path: /home/kubeadmin/.kube
+    state: directory
+    mode: "0700"
+
+- copy:
+    src: /etc/kubernetes/admin.conf
+    dest:  /home/kubeadmin/.kube/config
+    owner: kubeadmin
+    group: kubeadmin
+    mode: 0744
+    remote_src: yes
+
+- name: Creamos el fichero sudoers.d/kubeadmin
+  file:
+    path: /etc/sudoers.d/kubeadmin
+    state: touch
+    mode: 0744
+
+- name: Añadimos la lineea al fichero si no esta creada ya..
+  lineinfile:
+    path: /etc/sudoers.d/kubeadmin
+    line: 'ALL = (ALL) NOPASSWD: ALL'
+    create: yes

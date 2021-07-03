@@ -1,0 +1,6 @@
+- name: Configuracion del Ingress Controler y creacion usuario no administrador.
+  hosts: all
+  become: yes
+  
+  roles:
+    - k8s-master
