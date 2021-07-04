@@ -38,6 +38,22 @@ resource "azurerm_linux_virtual_machine" "master" {
         environment = "PRO"
     }
 
+provisioner "remote-exec" {
+  inline = [
+    "sudo -S yum install -y epel-release ",
+    "sudo yum install ansible -y",
+    ""
+]
+
+  connection {
+    type     = "ssh"
+    user     = "root"
+    password = "${var.root_password}"
+    host     = azurem_public_ip.myPublicIp1.ip_address
+  }
+}
+
+
 }
 
 resource "azurerm_linux_virtual_machine" "worker01" {
@@ -123,17 +139,3 @@ resource "azurerm_linux_virtual_machine" "worker02" {
     }
 
 }
-
-output "public_ip_address" {
-  description = "The actual ip address allocated for the resource."
-  value       = "${azurerm_public_ip.myPublicIp1.*.ip_address}"
-  }
-
-output "public_ip_address_1" {
-  description = "The actual ip address allocated for the resource."
-  value       = "${azurerm_public_ip.myPublicIp2.*.ip_address}"
-  }
-output "public_ip_address_2" {
-  description = "The actual ip address allocated for the resource."
-  value       = "${azurerm_public_ip.myPublicIp3.*.ip_address}"
-  }
