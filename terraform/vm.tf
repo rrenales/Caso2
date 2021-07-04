@@ -124,16 +124,16 @@ resource "azurerm_linux_virtual_machine" "worker02" {
 
 }
 
+output "public_ip_address" {
+  description = "The actual ip address allocated for the resource."
+  value       = "${azurerm_public_ip.myPublicIp1.*.ip_address}"
+  }
+
 output "public_ip_address_1" {
-  value = "${azurerm_public_ip.myPublicIp1.*.ip_address}"
-}
-
+  description = "The actual ip address allocated for the resource."
+  value       = "${azurerm_public_ip.myPublicIp2.*.ip_address}"
+  }
 output "public_ip_address_2" {
-  value = "${azurerm_public_ip.myPublicIp2.*.ip_address}"
-}
-
-
-output "public_ip_address_3" {
-  value = "${azurerm_public_ip.myPublicIp3.*.ip_address}"
-}
-
+  description = "The actual ip address allocated for the resource."
+  value       = "${azurerm_public_ip.myPublicIp3.*.ip_address}"
+  }
