@@ -1,10 +1,18 @@
 ---
 - name: Copiamos el fichero de configuracion de kubernetes.
-  
+
+- name: Creamos el directorio para desplegar la app de kubernetes.
+  file:
+    path: /opt/app/
+    state: directory
+    mode: "0744"
+
+#Copiamos el fichero con la config para lanzar la aplicación en kubernetes.
+
 - copy:
-    src: /etc/kubernetes/admin.conf
-    dest:  /home/kubeadmin/.kube/config
-    owner: kubeadmin
-    group: kubeadmin
+    src: files/app.yaml
+    dest:  /opt/app/app.yaml
     mode: 0744
-    remote_src: yes
+
+- name: Desplegamos la aplicación.
+  command: kubectl apply -f /opt/app.yaml
