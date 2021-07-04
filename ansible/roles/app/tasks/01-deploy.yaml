@@ -1,0 +1,10 @@
+---
+- name: Copiamos el fichero de configuracion de kubernetes.
+  
+- copy:
+    src: /etc/kubernetes/admin.conf
+    dest:  /home/kubeadmin/.kube/config
+    owner: kubeadmin
+    group: kubeadmin
+    mode: 0744
+    remote_src: yes

@@ -1,0 +1,6 @@
+- name: Desplegamos la aplicación powerdns en kubernetes.
+  hosts: all
+  become: yes
+  
+  roles:
+    - app
