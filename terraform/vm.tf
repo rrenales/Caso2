@@ -102,8 +102,8 @@ data "azurerm_public_ip_1" "myPublicIp2" {
  depends_on = [azurerm_linux_virtual_machine.worker01]
 }
 
-output "master_public_address_1" {
-  value = data.azurerm_public_ip.myPublicIp2.ip_address
+output "worker01_public_address" {
+  value = data.azurerm_public_ip_1.myPublicIp2.ip_address
 }
 
 
@@ -155,6 +155,6 @@ data "azurerm_public_ip_2" "myPublicIp3" {
  depends_on = [azurerm_linux_virtual_machine.worker02]
 }
 
-output "master_public_address" {
-  value = data.azurerm_public_ip.myPublicIp3.ip_address
+output "worker02_public_address" {
+  value = data.azurerm_public_ip_2.myPublicIp3.ip_address
 }
