@@ -52,7 +52,6 @@ output "master_public_address" {
 }
 
 
-}
 
 resource "azurerm_linux_virtual_machine" "worker01" {
     name                = "worker01.ruben.cat"
