@@ -40,13 +40,6 @@ resource "azurerm_linux_virtual_machine" "master" {
 
 }
 
-# Save Public IP into data for output
-data "azurerm_public_ip" "myPublicIp1" {
- name = azurerm_public_ip.myPublicIp1.name
- resource_group_name = azurerm_resource_group.rg.name
- depends_on = [azurerm_linux_virtual_machine.master]
-}
-
 output "master_public_address" {
   value = data.azurerm_public_ip.myPublicIp1.ip_address
 }
@@ -95,12 +88,6 @@ resource "azurerm_linux_virtual_machine" "worker01" {
 
 }
 
-# Save Public IP into data for output
-data "azurerm_public_ip_1" "myPublicIp2" {
- name = azurerm_public_ip.myPublicIp2.name
- resource_group_name = azurerm_resource_group.rg.name
- depends_on = [azurerm_linux_virtual_machine.worker01]
-}
 
 output "worker01_public_address" {
   value = data.azurerm_public_ip_1.myPublicIp2.ip_address
@@ -148,12 +135,7 @@ resource "azurerm_linux_virtual_machine" "worker02" {
     }
 
 }
-# Save Public IP into data for output
-data "azurerm_public_ip_2" "myPublicIp3" {
- name = azurerm_public_ip.myPublicIp3.name
- resource_group_name = azurerm_resource_group.rg.name
- depends_on = [azurerm_linux_virtual_machine.worker02]
-}
+
 
 output "worker02_public_address" {
   value = data.azurerm_public_ip_2.myPublicIp3.ip_address
