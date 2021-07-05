@@ -96,6 +96,14 @@ resource "azurerm_public_ip" "myPublicIp1" {
 
 }
 
+# Save Public IP into data for output
+data "azurerm_public_ip" "myPublicIp1" {
+ name = azurerm_public_ip.myPublicIp1.name
+ resource_group_name = azurerm_resource_group.rg.name
+ depends_on = [azurerm_linux_virtual_machine.master]
+}
+
+
 resource "azurerm_public_ip" "myPublicIp2" {
   name                = "vmip2"
   location            = azurerm_resource_group.rg.location

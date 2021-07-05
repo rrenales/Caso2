@@ -38,19 +38,10 @@ resource "azurerm_linux_virtual_machine" "master" {
         environment = "PRO"
     }
 
-provisioner "remote-exec" {
-  inline = [
-    "sudo -S yum install -y epel-release ",
-    "sudo yum install ansible -y",
-    ""
-]
+}
 
-  connection {
-    type     = "ssh"
-    user     = "root"
-    password = "${var.root_password}"
-    host     = azurem_public_ip.myPublicIp1.ip_address
-  }
+output "master_public_address" {
+  value = data.azurerm_public_ip.myPublicIp1.ip_address
 }
 
 
