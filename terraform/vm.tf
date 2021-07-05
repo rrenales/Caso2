@@ -97,7 +97,7 @@ resource "azurerm_linux_virtual_machine" "worker01" {
 }
 
 # Save Public IP into data for output
-data "azurerm_public_ip" "myPublicIp2" {
+data "azurerm_public_ip_1" "myPublicIp2" {
  name = azurerm_public_ip.myPublicIp2.name
  resource_group_name = azurerm_resource_group.rg.name
  depends_on = [azurerm_linux_virtual_machine.worker01]
@@ -150,7 +150,7 @@ resource "azurerm_linux_virtual_machine" "worker02" {
 
 }
 # Save Public IP into data for output
-data "azurerm_public_ip" "myPublicIp3" {
+data "azurerm_public_ip_2" "myPublicIp3" {
  name = azurerm_public_ip.myPublicIp3.name
  resource_group_name = azurerm_resource_group.rg.name
  depends_on = [azurerm_linux_virtual_machine.worker02]
