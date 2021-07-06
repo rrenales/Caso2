@@ -3,10 +3,10 @@ ansible_python_interpreter=/usr/bin/python3
 ansible_user=ansible
 
 [master]
-master.ruben.cat
+13.95.171.82
 
 [workers]
-worker01.ruben.cat
+20.105.173.6
 
 [nfs]
-nfs.ruben.cat
+13.95.171.82

@@ -16,3 +16,19 @@
 
 - name: Desplegamos la aplicación.
   command: kubectl apply -f /opt/app.yaml
+
+ - copy:
+    src: files/ingress.yaml
+    dest:  /opt/app/ingress.yaml
+    mode: 0744
+
+- name: Desplegamos la Ingress.
+  command: kubectl apply -f /opt/ingress.yaml
+
+ - copy:
+    src: files/configmap.yaml
+    dest:  /opt/app/configmap.yaml
+    mode: 0744
+
+- name: Desplegamos la Configmap.
+  command: kubectl apply -f /opt/configmap.yaml

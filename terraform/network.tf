@@ -61,24 +61,6 @@ resource "azurerm_network_interface" "myNic2" {
 
 }
 
-resource "azurerm_network_interface" "myNic3" {
-  name                = "vmnic3"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-
-    ip_configuration {
-    name                           = "myipconfiguration3"
-    subnet_id                      = azurerm_subnet.mySubnet.id
-    private_ip_address_allocation  = "Static"
-    private_ip_address             = "10.0.1.12"
-    public_ip_address_id           = azurerm_public_ip.myPublicIp3.id
-  }
-
-    tags = {
-        environment = "PRO"
-    }
-
-}
 
 # IP pública
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip
@@ -118,30 +100,10 @@ resource "azurerm_public_ip" "myPublicIp2" {
 }
 
 # Save Public IP into data for output
-data "azurerm_public_ip_1" "myPublicIp2" {
- name = azurerm_public_ip.myPublicIp1.name
+data "azurerm_public_ip" "myPublicIp2" {
+ name = azurerm_public_ip.myPublicIp2.name
  resource_group_name = azurerm_resource_group.rg.name
  depends_on = [azurerm_linux_virtual_machine.worker01]
 }
 
-
-resource "azurerm_public_ip" "myPublicIp3" {
-  name                = "vmip3"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-  allocation_method   = "Dynamic"
-  sku                 = "Basic"
-
-    tags = {
-        environment = "PRO"
-    }
-
-}
-
-# Save Public IP into data for output
-data "azurerm_public_ip_2" "myPublicIp3" {
- name = azurerm_public_ip.myPublicIp3.name
- resource_group_name = azurerm_resource_group.rg.name
- depends_on = [azurerm_linux_virtual_machine.worker02]
-}
 
