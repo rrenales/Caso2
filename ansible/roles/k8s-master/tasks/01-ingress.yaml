@@ -26,14 +26,8 @@
     mode: 0744
     remote_src: yes
 
-- name: Creamos el fichero sudoers.d/kubeadmin
-  file:
-    path: /etc/sudoers.d/kubeadmin
-    state: touch
-    mode: 0744
-
 - name: Añadimos la lineea al fichero si no esta creada ya..
   lineinfile:
-    path: /etc/sudoers.d/kubeadmin
-    line: 'ALL = (ALL) NOPASSWD: ALL'
+    path: /etc/sudoers.d/90-cloud-init-users
+    line: ALL = (ALL) NOPASSWD: ALL
     create: yes

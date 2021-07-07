@@ -1,22 +1,5 @@
 ---
 
-- copy:
-    src: kubernetes.repo
-    dest: /etc/yum.repos.d/kubernetes.repo
-    owner: root
-    group: root
-    mode: 0644
-
-- name: Instalamos kubernetes.
-  command: dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
-
-- name: Iniciamos el servicio kubelet y lo habilitamos.
-  systemd:
-    name: kubelet
-    state: restarted
-    enabled: yes
-
-
 # Configuramos reglas en el FW del master.
 
 - firewalld:
@@ -82,9 +65,9 @@
 - name: debug
   debug: msg="{{ kubeadm.stdout }}"
 
-- name: Exportamos config de kubectl para el user root.
-  shell: export KUBECONFIG
-  delegate_to: 127.0.0.1
+#- name: Exportamos config de kubectl para el user root.
+#  shell: export KUBECONFIG
+#  delegate_to: 127.0.0.1
 
 - name: Creamos el directorio para guardar la config que exportamos.
   file:

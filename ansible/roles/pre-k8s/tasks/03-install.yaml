@@ -13,3 +13,19 @@
     name: docker
     state: restarted
     enabled: yes
+
+- copy:
+    src: kubernetes.repo
+    dest: /etc/yum.repos.d/kubernetes.repo
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Instalamos kubernetes.
+  command: dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+
+- name: Iniciamos el servicio kubelet y lo habilitamos.
+  systemd:
+    name: kubelet
+    state: restarted
+    enabled: yes
