@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: webapp-routed
-        image: docker.io/psitrax/powerdns:latest
+        image: docker.io/pschiffe/powerdns:latest
         ports:
         - containerPort: 80
         readinessProbe:
