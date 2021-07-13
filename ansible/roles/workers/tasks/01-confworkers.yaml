@@ -17,7 +17,7 @@
     state: restarted
 
 - name: Añadiendo los workers al nodo.
-  command: kubeadm join 10.0.1.10:6443 --token "{{ token }}"
+  command: "{{ token }}"
 
 #damos tiempo a los workers a ponerse como ready.
 

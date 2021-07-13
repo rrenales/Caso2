@@ -1,5 +1,4 @@
 ---
-- name: Copiamos el fichero de configuracion de kubernetes.
 
 - name: Creamos el directorio para desplegar la app de kubernetes.
   file:
@@ -11,24 +10,29 @@
 
 - copy:
     src: files/app.yaml
-    dest:  /opt/app/app.yaml
+    dest: /opt/app/app.yaml
     mode: 0744
+- name: Creamos el namespace.
+  command: kubectl create namespace webapp-routed
 
 - name: Desplegamos la aplicación.
-  command: kubectl apply -f /opt/app.yaml
+  command: kubectl apply -f /opt/app/app.yaml
 
- - copy:
+- copy:
     src: files/ingress.yaml
-    dest:  /opt/app/ingress.yaml
+    dest: /opt/app/ingress.yaml
     mode: 0744
-
+ 
 - name: Desplegamos la Ingress.
-  command: kubectl apply -f /opt/ingress.yaml
+  command: kubectl apply -f /opt/app/ingress.yaml
+ 
+- name: Desplegamos ingress.
+  command: kubectl describe ingress webapp-ingress --namespace=webapp-routed
 
- - copy:
+- copy:
     src: files/configmap.yaml
-    dest:  /opt/app/configmap.yaml
+    dest: /opt/app/configmap.yaml
     mode: 0744
-
+ 
 - name: Desplegamos la Configmap.
-  command: kubectl apply -f /opt/configmap.yaml
+  command: kubectl apply -f /opt/app/configmap.yaml

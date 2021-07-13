@@ -26,8 +26,8 @@
     mode: 0744
     remote_src: yes
 
-- name: Añadimos la lineea al fichero si no esta creada ya..
-  lineinfile:
-    path: /etc/sudoers.d/90-cloud-init-users
-    line: ALL = (ALL) NOPASSWD: ALL
-    create: yes
+- name: Añadimos el fichero sudoers.
+  copy:
+    content: 'kubeadmin ALL=(ALL:ALL) NOPASSWD:ALL'
+    dest: /etc/sudoers.d/kubeadmin
+    mode: 0440

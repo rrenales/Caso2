@@ -19,11 +19,11 @@ spec:
       - name: webapp-routed
         image: docker.io/psitrax/powerdns:latest
         ports:
-        - containerPort: 53
+        - containerPort: 80
         readinessProbe:
           httpGet:
             path: /
-            port: 53
+            port: 80
           initialDelaySeconds: 5
           periodSeconds: 5
           successThreshold: 1
@@ -39,5 +39,5 @@ spec:
     ports:
     - name: http
       protocol: TCP
-      port: 53 # puerto en el que escucha el servicio
-      targetPort: 53 # puerto en el que escucha el contenedor
+      port: 80 # puerto en el que escucha el servicio
+      targetPort: 80 # puerto en el que escucha el contenedor

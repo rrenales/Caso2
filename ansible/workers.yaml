@@ -4,7 +4,7 @@
   
   vars_prompt:
     - name: "token"
-      prompt: "Introduce el token que se ha mostrado por pantalla en la tarea anterior con nombre: Instalamos el plugin CNI (Container Network Interface) de kubernetes"
+      prompt: "Introduce el token que se ha mostrado por pantalla"
       private: yes
     
   roles:
